@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">ghac</string>
-    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_activity_main">MainActivity2</string>
 </resources>
