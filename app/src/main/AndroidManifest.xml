@@ -12,10 +12,15 @@
         android:theme="@style/Theme.Ghac"
         tools:targetApi="31">
         <activity
+            android:name=".GhacScreen"
+            android:exported="false"
+            android:label="@string/title_activity_ghac_screen"
+            android:theme="@style/Theme.Ghac" />
+        <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Ghac"
-            android:exported="true">
+            android:theme="@style/Theme.Ghac">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
