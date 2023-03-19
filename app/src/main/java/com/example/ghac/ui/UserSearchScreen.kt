@@ -1,8 +1,13 @@
 package com.example.ghac.ui
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.TextField
+import androidx.compose.runtime.*
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.ghac.R
 
@@ -10,8 +15,20 @@ import com.example.ghac.R
 fun UserSearchScreen(
     onNextButtonClicked: () -> Unit = {},
 ) {
-    Button(onClick = onNextButtonClicked) {
-        Text(stringResource(R.string.user_search))
+    var text by remember { mutableStateOf("") }
+
+    Column {
+        Row {
+            TextField(value = text,
+                onValueChange = { text = it },
+                label = { Text(stringResource(R.string.user_name)) })
+            Button(onClick = onNextButtonClicked) {
+                Text(stringResource(R.string.user_search))
+            }
+        }
+        Image(
+            painter = painterResource(R.drawable.ic_android_56dp), contentDescription = "ドロイドアイコン"
+        )
     }
 }
 
