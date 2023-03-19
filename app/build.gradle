@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id "org.jlleitschuh.gradle.ktlint" version "11.3.1"
 }
 
 android {
@@ -18,6 +19,12 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        // propertiesファイルから読み取って、BuildConfigへGitHub PATを定義
+        def properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def GITHUB_PAT = properties.getProperty("github.pat")
+        buildConfigField("String", "GITHUB_PAT", "\"${GITHUB_PAT}\"")
     }
 
     buildTypes {
@@ -58,9 +65,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'io.coil-kt:coil-compose:2.2.2'
     implementation 'com.google.dagger:hilt-android:2.45'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.0-rc01'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.0'
     //noinspection GradleDependency
-    implementation 'androidx.activity:activity-compose:1.7.0-beta02'
+    implementation 'androidx.activity:activity-compose:1.7.0-rc01'
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
     implementation 'androidx.compose.material:material:1.3.1'
@@ -72,7 +79,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation 'com.google.dagger:hilt-android-testing:2.45'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.4.0-rc01"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 }

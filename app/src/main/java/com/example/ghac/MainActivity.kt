@@ -23,6 +23,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Greeting("Android")
+                    // Text(Constants.GITHUB_PAT)
                 }
             }
         }
