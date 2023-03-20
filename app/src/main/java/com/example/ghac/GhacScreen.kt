@@ -2,7 +2,11 @@ package com.example.ghac
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -19,7 +23,7 @@ import com.example.ghac.ui.UserSearchScreen
 
 enum class GhacScreen(@StringRes val title: Int) {
     UserSearch(title = R.string.user_search),
-    UserRepositories(title = R.string.user_repository),
+    UserRepositories(title = R.string.user_repository)
 }
 
 @Composable
@@ -84,10 +88,10 @@ fun GhacApp(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun DefaultPreview2() {
+// @Preview(showBackground = true)
+// @Composable
+// fun DefaultPreview2() {
 //    GhacTheme {
 //        Greeting2("Android")
 //    }
-//}
+// }

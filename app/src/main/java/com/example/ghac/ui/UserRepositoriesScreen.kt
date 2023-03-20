@@ -10,16 +10,16 @@ fun UserRepositoriesScreen() {
     Text(stringResource(R.string.user_repository))
 }
 
-//@Composable
-//fun SelectQuantityButton(
+// @Composable
+// fun SelectQuantityButton(
 //    @StringRes labelResourceId: Int,
 //    onClick: () -> Unit,
 //    modifier: Modifier = Modifier
-//) {
+// ) {
 //    Button(
 //        onClick = onClick,
 //        modifier = modifier.widthIn(min = 250.dp)
 //    ) {
 //        Text(stringResource(labelResourceId))
 //    }
-//}
+// }

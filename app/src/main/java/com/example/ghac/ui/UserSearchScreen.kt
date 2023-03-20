@@ -6,42 +6,49 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.ghac.R
 
 @Composable
 fun UserSearchScreen(
-    onNextButtonClicked: () -> Unit = {},
+    onNextButtonClicked: () -> Unit = {}
 ) {
     var text by remember { mutableStateOf("") }
 
     Column {
         Row {
-            TextField(value = text,
+            TextField(
+                value = text,
                 onValueChange = { text = it },
-                label = { Text(stringResource(R.string.user_name)) })
+                label = { Text(stringResource(R.string.user_name)) }
+            )
             Button(onClick = onNextButtonClicked) {
                 Text(stringResource(R.string.user_search))
             }
         }
         Image(
-            painter = painterResource(R.drawable.ic_android_56dp), contentDescription = "ドロイドアイコン"
+            painter = painterResource(R.drawable.ic_android_56dp),
+            contentDescription = "ドロイドアイコン"
         )
     }
 }
 
-//@Composable
-//fun SelectQuantityButton(
+// @Composable
+// fun SelectQuantityButton(
 //    @StringRes labelResourceId: Int,
 //    onClick: () -> Unit,
 //    modifier: Modifier = Modifier
-//) {
+// ) {
 //    Button(
 //        onClick = onClick,
 //        modifier = modifier.widthIn(min = 250.dp)
 //    ) {
 //        Text(stringResource(labelResourceId))
 //    }
-//}
+// }
