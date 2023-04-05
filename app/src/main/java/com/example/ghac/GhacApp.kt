@@ -1,6 +1,5 @@
 package com.example.ghac
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -14,17 +13,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.ghac.ui.UserRepositoriesScreen
-import com.example.ghac.ui.UserSearchScreen
-
-enum class GhacScreen(@StringRes val title: Int) {
-    UserSearch(title = R.string.user_search),
-    UserRepositories(title = R.string.user_repository)
-}
+import com.example.ghac.navigation.GhacScreen
+import com.example.ghac.navigation.NavGraph
 
 @Composable
 fun GhacAppBar(
@@ -72,26 +64,9 @@ fun GhacApp(
         }
     ) { innerPadding ->
 //        val uiState by viewModel.uiState.collectAsState()
-
-        NavHost(
+        NavGraph(
             navController = navController,
-            startDestination = GhacScreen.UserSearch.name,
             modifier = modifier.padding(innerPadding)
-        ) {
-            composable(route = GhacScreen.UserSearch.name) {
-                UserSearchScreen(onNextButtonClicked = { navController.navigate(GhacScreen.UserRepositories.name) })
-            }
-            composable(route = GhacScreen.UserRepositories.name) {
-                UserRepositoriesScreen()
-            }
-        }
+        )
     }
 }
-
-// @Preview(showBackground = true)
-// @Composable
-// fun DefaultPreview2() {
-//    GhacTheme {
-//        Greeting2("Android")
-//    }
-// }

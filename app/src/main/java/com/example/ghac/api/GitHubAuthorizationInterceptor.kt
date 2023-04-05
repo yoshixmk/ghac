@@ -1,6 +1,5 @@
-package com.example.ghac
+package com.example.ghac.api
 
-import com.example.ghac.api.Constants
 import okhttp3.Interceptor
 import okhttp3.Response
 

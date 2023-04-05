@@ -1,121 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="6" by="lint 7.4.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.4.0)" variant="all" version="7.4.0">
+<issues format="6" by="lint 7.4.0" type="baseline" client="gradle" dependencies="false"
+    name="AGP (7.4.0)" variant="all" version="7.4.0">
 
-    <issue
-        id="Instantiatable"
-        message="This class should provide a default constructor (a public constructor with no arguments) (`com.example.ghac.GhacScreen`)"
+    <issue id="Instantiatable"
+        message="This class should provide a default constructor (a public constructor with no arguments) (`com.example.ghac.navigation.GhacScreen`)"
         errorLine1="            android:name=&quot;.GhacScreen&quot;"
         errorLine2="                          ~~~~~~~~~~~">
-        <location
-            file="src/main/AndroidManifest.xml"
-            line="16"
-            column="27"/>
+        <location file="src/main/AndroidManifest.xml" line="16" column="27" />
     </issue>
 
-    <issue
-        id="Instantiatable"
-        message="`GhacScreen` must extend android.app.Activity"
+    <issue id="Instantiatable" message="`GhacScreen` must extend android.app.Activity"
         errorLine1="            android:name=&quot;.GhacScreen&quot;"
         errorLine2="                          ~~~~~~~~~~~">
-        <location
-            file="src/main/AndroidManifest.xml"
-            line="16"
-            column="27"/>
+        <location file="src/main/AndroidManifest.xml" line="16" column="27" />
     </issue>
 
-    <issue
-        id="ObsoleteSdkInt"
+    <issue id="ObsoleteSdkInt"
         message="This folder configuration (`v24`) is unnecessary; `minSdkVersion` is 24. Merge all the resources in this folder into `drawable`.">
-        <location
-            file="src/main/res/drawable-v24"/>
+        <location file="src/main/res/drawable-v24" />
     </issue>
 
-    <issue
-        id="UnusedResources"
-        message="The resource `R.layout.activity_main` appears to be unused"
+    <issue id="UnusedResources" message="The resource `R.layout.activity_main` appears to be unused"
         errorLine1="&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
         errorLine2="^">
-        <location
-            file="src/main/res/layout/activity_main.xml"
-            line="2"
-            column="1"/>
+        <location file="src/main/res/layout/activity_main.xml" line="2" column="1" />
     </issue>
 
-    <issue
-        id="UnusedResources"
+    <issue id="UnusedResources"
         message="The resource `R.mipmap.ic_launcher_round` appears to be unused"
         errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
         errorLine2="^">
-        <location
-            file="src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
-            line="2"
-            column="1"/>
+        <location file="src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" line="2" column="1" />
     </issue>
 
-    <issue
-        id="UnusedResources"
+    <issue id="UnusedResources"
         message="The resource `R.string.result_not_exist_user_` appears to be unused"
         errorLine1="    &lt;string name=&quot;result_not_exist_user_&quot;>検索結果なし&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="8"
-            column="13"/>
+        <location file="src/main/res/values/strings.xml" line="8" column="13" />
     </issue>
 
-    <issue
-        id="UnusedResources"
-        message="The resource `R.string.followers` appears to be unused"
+    <issue id="UnusedResources" message="The resource `R.string.followers` appears to be unused"
         errorLine1="    &lt;string name=&quot;followers&quot;>followers&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="10"
-            column="13"/>
+        <location file="src/main/res/values/strings.xml" line="10" column="13" />
     </issue>
 
-    <issue
-        id="UnusedResources"
-        message="The resource `R.string.following` appears to be unused"
+    <issue id="UnusedResources" message="The resource `R.string.following` appears to be unused"
         errorLine1="    &lt;string name=&quot;following&quot;>following&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="11"
-            column="13"/>
+        <location file="src/main/res/values/strings.xml" line="11" column="13" />
     </issue>
 
-    <issue
-        id="UnusedResources"
+    <issue id="UnusedResources"
         message="The resource `R.string.result_not_exist_repository` appears to be unused"
         errorLine1="    &lt;string name=&quot;result_not_exist_repository&quot;>リポジトリはありません&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="12"
-            column="13"/>
+        <location file="src/main/res/values/strings.xml" line="12" column="13" />
     </issue>
 
-    <issue
-        id="UnusedResources"
+    <issue id="UnusedResources"
         message="The resource `R.string.failed_call_api` appears to be unused"
         errorLine1="    &lt;string name=&quot;failed_call_api&quot;>通信に失敗しました。再度お試しください。&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="14"
-            column="13"/>
+        <location file="src/main/res/values/strings.xml" line="14" column="13" />
     </issue>
 
-    <issue
-        id="MonochromeLauncherIcon"
+    <issue id="MonochromeLauncherIcon"
         message="The application adaptive icon is missing a monochrome tag"
         errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
         errorLine2="^">
-        <location
-            file="src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
-            line="2"
-            column="1"/>
+        <location file="src/main/res/mipmap-anydpi-v26/ic_launcher.xml" line="2" column="1" />
     </issue>
 
 </issues>
