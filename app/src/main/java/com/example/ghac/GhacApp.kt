@@ -44,7 +44,6 @@ fun GhacAppBar(
 @Composable
 fun GhacApp(
     modifier: Modifier = Modifier,
-//    viewModel: OrderViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
     // Get current back stack entry
@@ -63,7 +62,6 @@ fun GhacApp(
             )
         }
     ) { innerPadding ->
-//        val uiState by viewModel.uiState.collectAsState()
         NavGraph(
             navController = navController,
             modifier = modifier.padding(innerPadding)

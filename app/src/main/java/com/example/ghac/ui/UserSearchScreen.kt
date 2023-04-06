@@ -3,6 +3,7 @@ package com.example.ghac.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -13,11 +14,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import com.example.ghac.R
 
 @Composable
 fun UserSearchScreen(
-    onNextButtonClicked: () -> Unit = {}
+    onNextButtonClicked: () -> Unit = {},
+    userSearchViewModel: UserSearchViewModel
 ) {
     var text by remember { mutableStateOf("") }
 
@@ -36,19 +40,19 @@ fun UserSearchScreen(
             painter = painterResource(R.drawable.ic_android_56dp),
             contentDescription = "ドロイドアイコン"
         )
+        GithubUserPagingList(userSearchViewModel)
     }
 }
 
-// @Composable
-// fun SelectQuantityButton(
-//    @StringRes labelResourceId: Int,
-//    onClick: () -> Unit,
-//    modifier: Modifier = Modifier
-// ) {
-//    Button(
-//        onClick = onClick,
-//        modifier = modifier.widthIn(min = 250.dp)
-//    ) {
-//        Text(stringResource(labelResourceId))
-//    }
-// }
+@Composable
+fun GithubUserPagingList(
+    viewModel: UserSearchViewModel
+) {
+    val lazyPagingItems = viewModel.pagingFlow.collectAsLazyPagingItems()
+
+    LazyColumn {
+        items(items = lazyPagingItems) { item ->
+            Text(text = item?.name ?: "no name")
+        }
+    }
+}
