@@ -27,9 +27,9 @@ interface GithubService {
      *
      * @see <a href="https://docs.github.com/ja/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user">list-repositories-for-a-user</a>
      */
-    @GET("users/{username}/repos")
+    @GET("users/{id}/repos")
     suspend fun getUser(
-        @Path("username") username: Long,
+        @Path("username") id: String,
         @Query("sort") sort: String,
         @Query("direction") direction: String,
         @Query("page") page: Int,
