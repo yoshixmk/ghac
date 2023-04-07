@@ -46,12 +46,14 @@ fun GhacApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
-    // Get current back stack entry
     val backStackEntry by navController.currentBackStackEntryAsState()
     // Get the name of the current screen
-    val currentScreen = GhacScreen.valueOf(
-        backStackEntry?.destination?.route ?: GhacScreen.UserSearch.name
-    )
+    val route = fun(): String {
+        val r = backStackEntry?.destination?.route ?: return GhacScreen.UserSearch.name
+        val regex = Regex("""^(\w+)/?.*""")
+        return regex.find(r)?.groupValues?.get(1) ?: GhacScreen.UserSearch.name
+    }()
+    val currentScreen = GhacScreen.valueOf(route)
 
     Scaffold(
         topBar = {
