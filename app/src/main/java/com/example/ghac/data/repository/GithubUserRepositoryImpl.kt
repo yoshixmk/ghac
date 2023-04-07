@@ -1,5 +1,6 @@
 package com.example.ghac.data.repository
 
+import com.example.ghac.domain.model.GithubUser
 import com.example.ghac.domain.repository.GithubUserRepository
 import com.example.ghac.domain.repository.GithubUsers
 import javax.inject.Inject
@@ -10,6 +11,14 @@ class GithubUserRepositoryImpl @Inject constructor() : GithubUserRepository {
         position: Int,
         paging_size: Int
     ): GithubUsers {
-        TODO("Not yet implemented")
+        // TODO
+        return listOf(
+            GithubUser(
+                login = "login",
+                id = 1,
+                name = "name",
+                avatar_url = "https://avatar_url"
+            )
+        )
     }
 }
