@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.ghac.domain.repository.GithubUserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -21,6 +22,7 @@ class UserSearchViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     val pagingFlow = _uiState.filterNotNull().flatMapLatest {
         Pager(PagingConfig(pageSize = 20)) {
             UserSearchPagingSource(userRepository, it.keyword)
