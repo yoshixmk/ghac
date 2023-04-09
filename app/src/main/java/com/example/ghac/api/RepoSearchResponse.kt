@@ -12,7 +12,6 @@ data class UserSearchResponse(
 data class User(
     @field:SerializedName("login") val login: String,
     @field:SerializedName("id") val id: Long,
-    @field:SerializedName("name") val name: String,
     @field:SerializedName("avatar_url") val avatar_url: String
 )
 

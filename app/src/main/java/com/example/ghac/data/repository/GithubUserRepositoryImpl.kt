@@ -15,6 +15,8 @@ class GithubUserRepositoryImpl @Inject constructor(
         position: Int,
         pagingSize: Int
     ): GithubUsers {
+        if (keyword.isBlank()) return emptyList()
+
         val searchedUsers = githubService.searchUsers(
             query = keyword,
             sort = "followers",
@@ -24,9 +26,8 @@ class GithubUserRepositoryImpl @Inject constructor(
         )
         return searchedUsers.items.map {
             GithubUser(
-                login = it.login,
                 id = it.id,
-                name = it.name,
+                name = it.login,
                 avatar_url = it.avatar_url,
             )
         }
