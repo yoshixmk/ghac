@@ -1,28 +1,34 @@
 package com.example.ghac.data.repository
 
+import com.example.ghac.api.GithubService
 import com.example.ghac.domain.model.GithubUser
 import com.example.ghac.domain.repository.GithubUserRepository
 import com.example.ghac.domain.repository.GithubUsers
 import javax.inject.Inject
 
-class GithubUserRepositoryImpl @Inject constructor() : GithubUserRepository {
-    private var position = 0
+class GithubUserRepositoryImpl @Inject constructor(
+    private val githubService: GithubService,
+) : GithubUserRepository {
 
     override suspend fun getGithubUsersByByKeyword(
         keyword: String,
         position: Int,
-        paging_size: Int
+        pagingSize: Int
     ): GithubUsers {
-        // TODO
-        if (position > 10) return emptyList()
-        this.position = position + 1
-        return listOf(
-            GithubUser(
-                login = "login",
-                id = this.position.toLong(),
-                name = "name",
-                avatar_url = "https://avatar_url"
-            )
+        val searchedUsers = githubService.searchUsers(
+            query = keyword,
+            sort = "followers",
+            order = "desc",
+            page = position,
+            itemsPerPage = pagingSize,
         )
+        return searchedUsers.items.map {
+            GithubUser(
+                login = it.login,
+                id = it.id,
+                name = it.name,
+                avatar_url = it.avatar_url,
+            )
+        }
     }
 }
