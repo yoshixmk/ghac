@@ -1,5 +1,6 @@
-package com.example.ghac
+package com.example.ghac.di
 
+import com.example.ghac.BuildConfig
 import com.example.ghac.api.Constants
 import com.example.ghac.api.GitHubAuthorizationInterceptor
 import com.example.ghac.api.GithubService
