@@ -1,18 +1,19 @@
-package com.example.ghac.ui
+package com.example.ghac.domain.pagingsource
 
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.ghac.domain.model.GithubUser
-import com.example.ghac.domain.repository.GithubUserRepository
+import com.example.ghac.domain.repository.GithubRepositories
+import com.example.ghac.domain.repository.GithubRepositoryRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class UserSearchPagingSource @Inject constructor(
-    private val userRepository: GithubUserRepository,
-    private val query: String,
-) : PagingSource<Int, GithubUser>() {
+class UserRepositoriesPagingSource @Inject constructor(
+    private val githubRepositoryRepository: GithubRepositoryRepository,
+    private val username: String,
+) : PagingSource<Int, GithubRepositories>() {
     companion object {
         const val FIRST_PAGE_INDEX = 1
         const val PAGING_SIZE = 20
@@ -25,11 +26,11 @@ class UserSearchPagingSource @Inject constructor(
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): PagingSource.LoadResult<Int, GithubUser> =
+    override suspend fun load(params: LoadParams<Int>): PagingSource.LoadResult<Int, GithubRepositories> =
         withContext(Dispatchers.IO) {
             val position = params.key ?: FIRST_PAGE_INDEX
             return@withContext try {
-                val result = userRepository.getGithubUsersByByKeyword(query, position, PAGING_SIZE)
+                val result = githubRepositoryRepository.getGithubRepositoriesByUsername(username)
                 LoadResult.Page(
                     data = result,
                     prevKey = null,
