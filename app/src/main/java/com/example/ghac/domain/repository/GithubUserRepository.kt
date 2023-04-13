@@ -8,6 +8,6 @@ interface GithubUserRepository {
     suspend fun getGithubUsersByByKeyword(
         keyword: String,
         position: Int = 1,
-        paging_size: Int = 20
+        pagingSize: Int = 20
     ): GithubUsers
 }

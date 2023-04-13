@@ -24,8 +24,8 @@ fun NavGraph(
         composable(route = GhacScreen.UserSearch.name) {
             val viewModel: UserSearchViewModel = hiltViewModel()
             UserSearchScreen(
-                onNextButtonClicked = { id -> navController.navigate(GhacScreen.UserRepositories.name + "/$id") },
-                userSearchViewModel = viewModel
+                onNext = { id -> navController.navigate(GhacScreen.UserRepositories.name + "/$id") },
+                viewModel = viewModel
             )
         }
         composable(
