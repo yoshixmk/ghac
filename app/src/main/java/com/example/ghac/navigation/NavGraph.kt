@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.ghac.ui.UserRepositoriesScreen
+import com.example.ghac.ui.UserRepositoriesViewModel
 import com.example.ghac.ui.UserSearchScreen
 import com.example.ghac.ui.UserSearchViewModel
 
@@ -24,18 +25,19 @@ fun NavGraph(
         composable(route = GhacScreen.UserSearch.name) {
             val viewModel: UserSearchViewModel = hiltViewModel()
             UserSearchScreen(
-                onNext = { id -> navController.navigate(GhacScreen.UserRepositories.name + "/$id") },
+                onNext = { username -> navController.navigate(GhacScreen.UserRepositories.name + "/$username") },
                 viewModel = viewModel
             )
         }
         composable(
-            route = GhacScreen.UserRepositories.name + "/{id}",
-            arguments = listOf(navArgument("id") {
-                type = NavType.LongType
+            route = GhacScreen.UserRepositories.name + "/{username}",
+            arguments = listOf(navArgument("username") {
+                type = NavType.StringType
             })
         ) { backStackEntry ->
-            val id = backStackEntry.arguments?.getLong("id") ?: 0L
-            UserRepositoriesScreen(id)
+            val viewModel: UserRepositoriesViewModel = hiltViewModel()
+            val username = backStackEntry.arguments?.getString("username") ?: ""
+            UserRepositoriesScreen(username, viewModel)
         }
     }
 }

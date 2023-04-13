@@ -1,16 +1,31 @@
 package com.example.ghac.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
-import com.example.ghac.R
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
+import com.example.ghac.domain.model.GithubRepository
 
 @Composable
-fun UserRepositoriesScreen(id: Long) {
+fun UserRepositoriesScreen(username: String, viewModel: UserRepositoriesViewModel) {
+
+    val lazyPagingItems: LazyPagingItems<GithubRepository> =
+        viewModel.pagingFlow(username).collectAsLazyPagingItems()
+
     Column {
-        Text(text = "id = $id")
-        Text(stringResource(R.string.user_repository))
+        Text(text = "username = $username")
+    }
+
+    LazyColumn {
+        items(items = lazyPagingItems) { item ->
+            Row {
+                Text(item?.name ?: "no name")
+            }
+        }
     }
 }
 

@@ -1,9 +1,10 @@
-package com.example.ghac.domain.repository
+package com.example.ghac.domain.pagingsource
 
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.ghac.domain.model.GithubUser
+import com.example.ghac.domain.repository.GithubUserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
