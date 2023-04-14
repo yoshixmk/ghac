@@ -5,5 +5,9 @@ import com.example.ghac.domain.model.GithubRepository
 typealias GithubRepositories = List<GithubRepository>
 
 interface GithubRepositoryRepository {
-    suspend fun getGithubRepositoriesByUsername(username: String): GithubRepositories
+    suspend fun getGithubRepositoriesByUsername(
+        username: String,
+        page: Int,
+        itemsPerPage: Int
+    ): GithubRepositories
 }

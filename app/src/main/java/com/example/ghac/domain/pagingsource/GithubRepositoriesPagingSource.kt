@@ -31,7 +31,11 @@ class GithubRepositoriesPagingSource @Inject constructor(
             val position = params.key ?: FIRST_PAGE_INDEX
             return@withContext try {
                 val result: GithubRepositories =
-                    githubRepositoryRepository.getGithubRepositoriesByUsername(username) // TODO
+                    githubRepositoryRepository.getGithubRepositoriesByUsername(
+                        username = username,
+                        page = position,
+                        itemsPerPage = PAGING_SIZE
+                    )
                 LoadResult.Page(data = result, prevKey = null,
                     //次のページデータがない場合はnullを返してページング終了
                     nextKey = (position + 1).takeIf { result.isNotEmpty() })

@@ -9,13 +9,17 @@ import javax.inject.Inject
 class GithubRepositoryRepositoryImpl @Inject constructor(
     private val githubService: GithubService
 ) : GithubRepositoryRepository {
-    override suspend fun getGithubRepositoriesByUsername(username: String): GithubRepositories {
+    override suspend fun getGithubRepositoriesByUsername(
+        username: String,
+        page: Int,
+        itemsPerPage: Int
+    ): GithubRepositories {
         return githubService.getRepos(
             username = username,
-            sort = null,
-            direction = null,
-            page = null,
-            itemsPerPage = null
+            sort = "updated",
+            direction = "desc",
+            page = page,
+            itemsPerPage = itemsPerPage
         ).map {
             GithubRepository(
                 id = it.id,
