@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
@@ -27,7 +28,7 @@ import com.example.ghac.domain.model.GithubUser
 @Composable
 fun UserSearchScreen(
     onNext: (username: String) -> Unit = {},
-    viewModel: UserSearchViewModel
+    viewModel: UserSearchViewModel = hiltViewModel()
 ) {
     var text by remember { mutableStateOf("") }
     val lazyPagingItems: LazyPagingItems<GithubUser> =
