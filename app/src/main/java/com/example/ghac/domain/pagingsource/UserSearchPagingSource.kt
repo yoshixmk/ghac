@@ -1,4 +1,4 @@
-package com.example.ghac.ui
+package com.example.ghac.domain.pagingsource
 
 
 import androidx.paging.PagingSource

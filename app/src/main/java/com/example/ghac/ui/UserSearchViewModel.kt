@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import com.example.ghac.domain.pagingsource.UserSearchPagingSource
 import com.example.ghac.domain.repository.GithubUserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -18,6 +19,9 @@ import javax.inject.Inject
 class UserSearchViewModel @Inject constructor(
     private val userRepository: GithubUserRepository
 ) : ViewModel() {
+    data class UiState(
+        val keyword: String = ""
+    )
 
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState
@@ -35,7 +39,3 @@ class UserSearchViewModel @Inject constructor(
         )
     }
 }
-
-data class UiState(
-    val keyword: String = ""
-)

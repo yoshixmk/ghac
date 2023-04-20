@@ -27,12 +27,12 @@ interface GithubService {
      *
      * @see <a href="https://docs.github.com/ja/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user">list-repositories-for-a-user</a>
      */
-    @GET("users/{id}/repos")
-    suspend fun getUser(
-        @Path("username") id: String,
-        @Query("sort") sort: String,
-        @Query("direction") direction: String,
-        @Query("page") page: Int,
-        @Query("per_page") itemsPerPage: Int
+    @GET("users/{username}/repos")
+    suspend fun getRepos(
+        @Path("username") username: String,
+        @Query("sort") sort: String?,
+        @Query("direction") direction: String?,
+        @Query("page") page: Int?,
+        @Query("per_page") itemsPerPage: Int?
     ): List<Repo>
 }

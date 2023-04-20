@@ -26,7 +26,7 @@ import com.example.ghac.domain.model.GithubUser
 
 @Composable
 fun UserSearchScreen(
-    onNext: (id: Long) -> Unit = {},
+    onNext: (username: String) -> Unit = {},
     viewModel: UserSearchViewModel
 ) {
     var text by remember { mutableStateOf("") }
@@ -53,7 +53,7 @@ fun UserSearchScreen(
 
 @Composable
 fun GithubUserPagingList(
-    onNext: (id: Long) -> Unit = {},
+    onNext: (username: String) -> Unit = {},
     lazyPagingItems: LazyPagingItems<GithubUser>
 ) {
     LazyColumn {
@@ -66,7 +66,7 @@ fun GithubUserPagingList(
                     contentDescription = "user icon",
                     modifier = Modifier.width(56.dp)
                 )
-                TextButton(onClick = { onNext(item?.id ?: 0L) }) {
+                TextButton(onClick = { onNext(item?.name ?: "yoshixmk") }) {
                     Text(item?.name ?: "no name")
                 }
             }
