@@ -31,8 +31,8 @@ android {
         val properties = Properties().apply {
             load(FileInputStream(File(rootProject.rootDir, "local.properties")))
         }
-        val GITHUB_PAT = properties.getProperty("github.pat")
-        buildConfigField("String", "GITHUB_PAT", "\"${GITHUB_PAT}\"")
+        val githubPat = properties.getProperty("github.pat")
+        buildConfigField("String", "GITHUB_PAT", "\"${githubPat}\"")
     }
 
     buildTypes {
@@ -64,8 +64,8 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    lintOptions {
-        baseline(file("lint-baseline.xml"))
+    lint {
+        baseline = file("lint-baseline.xml")
     }
 }
 
