@@ -17,13 +17,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.example.ghac.domain.model.GithubRepository
 
 @Composable
-fun UserRepositoriesScreen(username: String, viewModel: UserRepositoriesViewModel) {
+fun UserRepositoriesScreen(
+    username: String,
+    viewModel: UserRepositoriesViewModel = hiltViewModel()
+) {
 
     val lazyPagingItems: LazyPagingItems<GithubRepository> =
         viewModel.pagingFlow(username).collectAsLazyPagingItems()
