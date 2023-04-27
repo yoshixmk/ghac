@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE")
+
 buildscript {
     val composeUiVersion by extra("1.4.2")
     val pagingVersion by extra("3.1.1")
