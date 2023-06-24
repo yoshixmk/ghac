@@ -1,9 +1,10 @@
 @file:Suppress("UNUSED_VARIABLE")
 
 buildscript {
-    val composeUiVersion by extra("1.4.2")
-    val pagingVersion by extra("3.1.1")
-    val kotestVersion by extra("5.6.1")
+    val composeUiVersion by extra("1.4.3")
+    val kotestVersion by extra("5.6.2")
+    val hiltVersion by extra("2.46.1")
+    val navigationComposeVersion by extra("2.6.0")
 }
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
