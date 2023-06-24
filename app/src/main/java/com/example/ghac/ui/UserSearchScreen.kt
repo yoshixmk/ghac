@@ -1,13 +1,18 @@
 package com.example.ghac.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,18 +40,29 @@ fun UserSearchScreen(
         viewModel.pagingFlow.collectAsLazyPagingItems()
 
     Column {
-        Row {
-            TextField(
+        Row(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            OutlinedTextField(
                 value = text,
                 onValueChange = { text = it },
-                label = { Text(stringResource(R.string.user_name)) }
+                label = { Text(stringResource(R.string.user_name)) },
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Clear,
+                        contentDescription = "clear text",
+                        modifier = Modifier.clickable { text = "" },
+                    )
+                },
+                maxLines = 1,
+                singleLine = true,
+                modifier = Modifier
+                    .clickable {
+                        viewModel.setQuery(keyword = text)
+                        lazyPagingItems.refresh()
+                    }
+                    .fillMaxWidth()
             )
-            Button(onClick = {
-                viewModel.setQuery(keyword = text)
-                lazyPagingItems.refresh()
-            }) {
-                Text(stringResource(R.string.user_search))
-            }
         }
         GithubUserPagingList(onNext, lazyPagingItems)
     }
@@ -54,8 +70,7 @@ fun UserSearchScreen(
 
 @Composable
 fun GithubUserPagingList(
-    onNext: (username: String) -> Unit = {},
-    lazyPagingItems: LazyPagingItems<GithubUser>
+    onNext: (username: String) -> Unit = {}, lazyPagingItems: LazyPagingItems<GithubUser>
 ) {
     LazyColumn {
         items(items = lazyPagingItems) { item ->
