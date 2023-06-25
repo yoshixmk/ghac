@@ -26,7 +26,7 @@ class GithubRepositoriesPagingSource @Inject constructor(
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): PagingSource.LoadResult<Int, GithubRepo> =
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GithubRepo> =
         withContext(Dispatchers.IO) {
             val position = params.key ?: FIRST_PAGE_INDEX
             return@withContext try {

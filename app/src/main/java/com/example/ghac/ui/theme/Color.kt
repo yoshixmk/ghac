@@ -9,3 +9,5 @@ val Blue700 = Color(0xFF1A75D2)
 val Teal200 = Color(0xFF03DAC5)
 
 val White = Color(0xFFFFFFFF)
+val Black = Color(0x00000000)
+val BlackThin = Black.copy(alpha = 0.6f)
