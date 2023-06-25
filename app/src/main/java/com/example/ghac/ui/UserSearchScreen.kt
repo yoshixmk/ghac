@@ -29,7 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import com.example.ghac.R
 import com.example.ghac.domain.model.GithubUser
@@ -89,7 +90,12 @@ fun GithubUserPagingList(
     onNext: (username: String) -> Unit = {}, lazyPagingItems: LazyPagingItems<GithubUser>
 ) {
     LazyColumn {
-        items(items = lazyPagingItems) { item ->
+        items(
+            count = lazyPagingItems.itemCount,
+            key = lazyPagingItems.itemKey(),
+            contentType = lazyPagingItems.itemContentType()
+        ) { index ->
+            val item = lazyPagingItems[index]
             Row {
                 AsyncImage(
                     model = item?.avatar_url,
