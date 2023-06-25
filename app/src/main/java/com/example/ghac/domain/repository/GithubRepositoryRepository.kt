@@ -1,8 +1,8 @@
 package com.example.ghac.domain.repository
 
-import com.example.ghac.domain.model.GithubRepository
+import com.example.ghac.domain.model.GithubRepo
 
-typealias GithubRepositories = List<GithubRepository>
+typealias GithubRepositories = List<GithubRepo>
 
 interface GithubRepositoryRepository {
     suspend fun getGithubRepositoriesByUsername(

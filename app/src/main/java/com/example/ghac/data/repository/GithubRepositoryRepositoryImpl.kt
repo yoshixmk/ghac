@@ -1,7 +1,7 @@
 package com.example.ghac.data.repository
 
 import com.example.ghac.api.GithubService
-import com.example.ghac.domain.model.GithubRepository
+import com.example.ghac.domain.model.GithubRepo
 import com.example.ghac.domain.repository.GithubRepositories
 import com.example.ghac.domain.repository.GithubRepositoryRepository
 import javax.inject.Inject
@@ -21,7 +21,7 @@ class GithubRepositoryRepositoryImpl @Inject constructor(
             page = page,
             itemsPerPage = itemsPerPage
         ).map {
-            GithubRepository(
+            GithubRepo(
                 id = it.id,
                 name = it.name,
                 fullName = it.fullName,

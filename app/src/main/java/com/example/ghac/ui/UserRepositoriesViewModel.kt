@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.ghac.domain.model.GithubRepository
+import com.example.ghac.domain.model.GithubRepo
 import com.example.ghac.domain.pagingsource.GithubRepositoriesPagingSource
 import com.example.ghac.domain.repository.GithubRepositoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +27,7 @@ class UserRepositoriesViewModel @Inject constructor(
     val uiState: StateFlow<UserSearchViewModel.UiState> = _uiState.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun pagingFlow(username: String): Flow<PagingData<GithubRepository>> {
+    fun pagingFlow(username: String): Flow<PagingData<GithubRepo>> {
         return _uiState.filterNotNull().flatMapLatest {
             Pager(PagingConfig(pageSize = 20)) {
                 GithubRepositoriesPagingSource(githubRepositoryRepository, username)

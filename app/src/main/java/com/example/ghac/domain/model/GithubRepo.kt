@@ -1,7 +1,7 @@
 package com.example.ghac.domain.model
 
 // likes Response Repo
-class GithubRepository(
+class GithubRepo(
     val id: Long,
     val name: String,
     val fullName: String,

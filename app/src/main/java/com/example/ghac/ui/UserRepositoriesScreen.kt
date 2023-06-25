@@ -26,7 +26,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import com.example.ghac.R
-import com.example.ghac.domain.model.GithubRepository
+import com.example.ghac.domain.model.GithubRepo
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
@@ -35,14 +35,14 @@ fun UserRepositoriesScreen(
     viewModel: UserRepositoriesViewModel = hiltViewModel()
 ) {
 
-    val lazyPagingItems: LazyPagingItems<GithubRepository> =
+    val lazyPagingItems: LazyPagingItems<GithubRepo> =
         viewModel.pagingFlow(username).collectAsLazyPagingItems()
 
     Column {
         Text(text = "username = $username") // TODO create top panel
         Spacer(modifier = Modifier.size(16.dp))
 
-        UserRepositoryPagingList(lazyPagingItems)
+        UserRepoPagingList(lazyPagingItems)
 
         if (viewModel.uiState.value.keyword.isNotEmpty() && lazyPagingItems.itemCount == 0) {
             Row(
@@ -58,7 +58,7 @@ fun UserRepositoriesScreen(
 }
 
 @Composable
-fun UserRepositoryPagingList(lazyPagingItems: LazyPagingItems<GithubRepository>) {
+fun UserRepoPagingList(lazyPagingItems: LazyPagingItems<GithubRepo>) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
