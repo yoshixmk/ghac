@@ -5,7 +5,7 @@
     <string name="title_activity_ghac_screen">GhacScreen</string>
     <string name="user_search">ユーザー検索</string>
     <string name="user_name">ユーザー名</string>
-    <string name="result_not_exist_user_">検索結果なし</string>
+    <string name="result_not_exist_user">検索結果なし</string>
     <string name="user_repository">ユーザーリポジトリ</string>
     <string name="followers">followers</string>
     <string name="following">following</string>

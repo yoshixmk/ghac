@@ -14,6 +14,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
@@ -23,7 +24,7 @@ class UserRepositoriesViewModel @Inject constructor(
     private val githubRepositoryRepository: GithubRepositoryRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(UserSearchViewModel.UiState())
-    val uiState: StateFlow<UserSearchViewModel.UiState> = _uiState
+    val uiState: StateFlow<UserSearchViewModel.UiState> = _uiState.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun pagingFlow(username: String): Flow<PagingData<GithubRepository>> {
