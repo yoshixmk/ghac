@@ -4,14 +4,13 @@ package com.example.ghac.domain.pagingsource
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.ghac.domain.model.GithubRepo
-import com.example.ghac.domain.repository.GithubRepositories
-import com.example.ghac.domain.repository.GithubRepositoryRepository
+import com.example.ghac.domain.repository.GithubRepoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class GithubRepositoriesPagingSource @Inject constructor(
-    private val githubRepositoryRepository: GithubRepositoryRepository,
+    private val githubRepoRepository: GithubRepoRepository,
     private val username: String,
 ) : PagingSource<Int, GithubRepo>() {
     companion object {
@@ -30,8 +29,8 @@ class GithubRepositoriesPagingSource @Inject constructor(
         withContext(Dispatchers.IO) {
             val position = params.key ?: FIRST_PAGE_INDEX
             return@withContext try {
-                val result: GithubRepositories =
-                    githubRepositoryRepository.getGithubRepositoriesByUsername(
+                val result =
+                    githubRepoRepository.getGithubRepositoriesByUsername(
                         username = username,
                         page = position,
                         itemsPerPage = PAGING_SIZE

@@ -2,18 +2,17 @@ package com.example.ghac.data.repository
 
 import com.example.ghac.api.GithubService
 import com.example.ghac.domain.model.GithubRepo
-import com.example.ghac.domain.repository.GithubRepositories
-import com.example.ghac.domain.repository.GithubRepositoryRepository
+import com.example.ghac.domain.repository.GithubRepoRepository
 import javax.inject.Inject
 
-class GithubRepositoryRepositoryImpl @Inject constructor(
+class GithubRepoRepositoryImpl @Inject constructor(
     private val githubService: GithubService
-) : GithubRepositoryRepository {
+) : GithubRepoRepository {
     override suspend fun getGithubRepositoriesByUsername(
         username: String,
         page: Int,
         itemsPerPage: Int
-    ): GithubRepositories {
+    ): List<GithubRepo> {
         return githubService.getRepos(
             username = username,
             sort = "updated",

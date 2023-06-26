@@ -7,7 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.ghac.ui.UserRepositoriesScreen
+import com.example.ghac.ui.UserReposScreen
 import com.example.ghac.ui.UserSearchScreen
 
 @Composable
@@ -31,7 +31,7 @@ fun NavGraph(
             })
         ) { backStackEntry ->
             val username = backStackEntry.arguments?.getString("username") ?: ""
-            UserRepositoriesScreen(username)
+            UserReposScreen(username)
         }
     }
 }

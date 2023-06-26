@@ -18,6 +18,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -33,29 +35,32 @@ import com.example.ghac.ui.theme.BlackThin
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun UserRepositoriesScreen(
+fun UserReposScreen(
     username: String,
-    viewModel: UserRepositoriesViewModel = hiltViewModel()
+    viewModel: UserRepositoriesViewModel = hiltViewModel(),
 ) {
 
     val lazyPagingItems: LazyPagingItems<GithubRepo> =
         viewModel.pagingFlow(username).collectAsLazyPagingItems()
 
+    viewModel.refreshUser(username)
+    val uiState: UserRepositoriesViewModel.UiState by viewModel.uiState.collectAsState()
+
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
+        Text(text = uiState.user?.name ?: "")
         Text(text = "username = $username") // TODO create top panel
         Row(modifier = Modifier.align(alignment = Alignment.End)) {
             Icon(imageVector = Icons.Default.PeopleOutline, contentDescription = "people")
             Text(text = "?? followers ・ ")
             Text(text = "?? following")
-
         }
         Spacer(modifier = Modifier.size(16.dp))
 
         UserRepoPagingList(lazyPagingItems)
 
-        if (viewModel.uiState.value.keyword.isNotEmpty() && lazyPagingItems.itemCount == 0) {
+        if (viewModel.uiStatePre.value.keyword.isNotEmpty() && lazyPagingItems.itemCount == 0) {
             Row(
                 modifier = Modifier.fillMaxSize(),
                 horizontalArrangement = Arrangement.Center,

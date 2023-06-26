@@ -35,4 +35,12 @@ interface GithubService {
         @Query("page") page: Int?,
         @Query("per_page") itemsPerPage: Int?
     ): List<Repo>
+
+    /**
+     * a user
+     */
+    @GET("users/{username}")
+    suspend fun getUser(
+        @Path("username") username: String,
+    ): User
 }

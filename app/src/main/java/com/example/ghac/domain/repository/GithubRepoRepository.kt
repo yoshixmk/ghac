@@ -2,12 +2,10 @@ package com.example.ghac.domain.repository
 
 import com.example.ghac.domain.model.GithubRepo
 
-typealias GithubRepositories = List<GithubRepo>
-
-interface GithubRepositoryRepository {
+interface GithubRepoRepository {
     suspend fun getGithubRepositoriesByUsername(
         username: String,
         page: Int,
         itemsPerPage: Int
-    ): GithubRepositories
+    ): List<GithubRepo>
 }

@@ -33,7 +33,7 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import com.example.ghac.R
-import com.example.ghac.domain.model.GithubUser
+import com.example.ghac.domain.model.GithubUserItem
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
@@ -42,7 +42,7 @@ fun UserSearchScreen(
     viewModel: UserSearchViewModel = hiltViewModel()
 ) {
     var text by remember { mutableStateOf("") }
-    val lazyPagingItems: LazyPagingItems<GithubUser> =
+    val lazyPagingItems: LazyPagingItems<GithubUserItem> =
         viewModel.pagingFlow.collectAsLazyPagingItems()
 
     Column {
@@ -87,7 +87,7 @@ fun UserSearchScreen(
 
 @Composable
 fun GithubUserPagingList(
-    onNext: (username: String) -> Unit = {}, lazyPagingItems: LazyPagingItems<GithubUser>
+    onNext: (username: String) -> Unit = {}, lazyPagingItems: LazyPagingItems<GithubUserItem>
 ) {
     LazyColumn {
         items(
