@@ -40,7 +40,7 @@ class UserRepositoriesViewModel @Inject constructor(
 
     fun user(username: String?) {
         viewModelScope.launch {
-            if (!username.isNullOrEmpty()) {
+            if (!username.isNullOrEmpty() && _uiState.value is UiState.Loading) {
                 _uiState.value = UiState.Success(githubUserRepository.getGithubUser(username))
             }
         }
@@ -48,6 +48,9 @@ class UserRepositoriesViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun pagingFlow(username: String): Flow<PagingData<GithubRepo>> {
+        // should be better good idea
+        user(username)
+
         return _uiStatePre.filterNotNull().flatMapLatest {
             Pager(PagingConfig(pageSize = 20)) {
                 GithubRepositoriesPagingSource(githubRepoRepository, username)
