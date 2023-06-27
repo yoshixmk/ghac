@@ -16,10 +16,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,22 +27,21 @@ class UserRepositoriesViewModel @Inject constructor(
     private val githubUserRepository: GithubUserRepository,
 ) : ViewModel() {
     private val _uiStatePre = MutableStateFlow(UserSearchViewModel.UiState())
-    val uiStatePre: StateFlow<UserSearchViewModel.UiState> = _uiStatePre.asStateFlow()
+    val uiStatePre: StateFlow<UserSearchViewModel.UiState> = _uiStatePre
 
-    data class UiState(
-        val user: GithubUser? = null
-    )
+    sealed interface UiState {
+        data class Success(val user: GithubUser) : UiState
+        object Loading : UiState
+    }
 
-    private val _uiState = MutableStateFlow(UiState())
+    private val _uiState =
+        MutableStateFlow<UiState>(UiState.Loading)
     val uiState: StateFlow<UiState> = _uiState
 
-    // I think there is the better idea
-    fun refreshUser(username: String) {
+    fun user(username: String?) {
         viewModelScope.launch {
-            _uiState.update { currentState ->
-                currentState.copy(
-                    user = githubUserRepository.getGithubUser(username)
-                )
+            if (!username.isNullOrEmpty()) {
+                _uiState.value = UiState.Success(githubUserRepository.getGithubUser(username))
             }
         }
     }

@@ -18,8 +18,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -43,13 +43,14 @@ fun UserReposScreen(
     val lazyPagingItems: LazyPagingItems<GithubRepo> =
         viewModel.pagingFlow(username).collectAsLazyPagingItems()
 
-    viewModel.refreshUser(username)
-    val uiState: UserRepositoriesViewModel.UiState by viewModel.uiState.collectAsState()
+    val uiState: State<UserRepositoriesViewModel.UiState> = viewModel.uiState.collectAsState()
 
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
-        Text(text = uiState.user?.name ?: "")
+        if (uiState.value is UserRepositoriesViewModel.UiState.Success) {
+            Text(text = (uiState.value as UserRepositoriesViewModel.UiState.Success).user.name)
+        }
         Text(text = "username = $username") // TODO create top panel
         Row(modifier = Modifier.align(alignment = Alignment.End)) {
             Icon(imageVector = Icons.Default.PeopleOutline, contentDescription = "people")
