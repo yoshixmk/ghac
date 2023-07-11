@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UserRepositoriesViewModel @Inject constructor(
+class UserRepoViewModel @Inject constructor(
     private val githubRepoRepository: GithubRepoRepository,
     private val githubUserRepository: GithubUserRepository,
 ) : ViewModel() {

@@ -21,6 +21,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.ghac.navigation.GhacScreen
 import com.example.ghac.navigation.NavGraph
+import com.example.ghac.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,7 +44,8 @@ fun GhacAppBar(
                 IconButton(onClick = navigateUp) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.back_button)
+                        contentDescription = stringResource(R.string.back_button),
+                        tint = White
                     )
                 }
             }

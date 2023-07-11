@@ -8,11 +8,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PeopleOutline
 import androidx.compose.material.icons.filled.StarOutline
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +26,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,6 +36,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
+import coil.compose.AsyncImage
 import com.example.ghac.R
 import com.example.ghac.domain.model.GithubRepo
 import com.example.ghac.ui.theme.BlackThin
@@ -37,25 +45,44 @@ import com.example.ghac.ui.theme.BlackThin
 @Composable
 fun UserReposScreen(
     username: String,
-    viewModel: UserRepositoriesViewModel = hiltViewModel(),
+    viewModel: UserRepoViewModel = hiltViewModel(),
 ) {
 
     val lazyPagingItems: LazyPagingItems<GithubRepo> =
         viewModel.pagingFlow(username).collectAsLazyPagingItems()
 
-    val uiState: State<UserRepositoriesViewModel.UiState> = viewModel.uiState.collectAsState()
+    val uiState: State<UserRepoViewModel.UiState> = viewModel.uiState.collectAsState()
 
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
-        if (uiState.value is UserRepositoriesViewModel.UiState.Success) {
-            Text(text = (uiState.value as UserRepositoriesViewModel.UiState.Success).user.name)
-        }
-        Text(text = "username = $username") // TODO create top panel
-        Row(modifier = Modifier.align(alignment = Alignment.End)) {
-            Icon(imageVector = Icons.Default.PeopleOutline, contentDescription = "people")
-            Text(text = "?? followers ・ ")
-            Text(text = "?? following")
+        if (uiState.value is UserRepoViewModel.UiState.Success) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                AsyncImage(
+                    model = (uiState.value as UserRepoViewModel.UiState.Success).user.avatar_url,
+                    placeholder = painterResource(R.drawable.ic_android_56dp),
+                    error = painterResource(R.drawable.ic_android_56dp),
+                    contentDescription = "user icon",
+                    modifier = Modifier
+                        .width(56.dp)
+                        .clip(CircleShape)
+                )
+                Column {
+                    (uiState.value as UserRepoViewModel.UiState.Success).user.name?.let { Text(text = it) }
+                    Text(text = username, color = Color.Gray)
+                }
+            }
+            Row(
+                modifier = Modifier.align(alignment = Alignment.End),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Icon(imageVector = Icons.Default.PeopleOutline, contentDescription = "people")
+                Text(text = "${(uiState.value as UserRepoViewModel.UiState.Success).user.followers} followers")
+                Text(text = "・")
+                Text(text = "${(uiState.value as UserRepoViewModel.UiState.Success).user.following} following")
+            }
         }
         Spacer(modifier = Modifier.size(16.dp))
 
@@ -86,9 +113,15 @@ fun UserRepoPagingList(lazyPagingItems: LazyPagingItems<GithubRepo>) {
         ) { index ->
             val item = lazyPagingItems[index]
             item?.let {
-                ElevatedCard {
+                ElevatedCard(
+                    colors = CardDefaults.elevatedCardColors(
+                        containerColor = MaterialTheme.colorScheme.background
+                    )
+                ) {
                     Column(
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
                     ) {
                         Text(
                             text = item.name,
@@ -112,6 +145,7 @@ fun UserRepoPagingList(lazyPagingItems: LazyPagingItems<GithubRepo>) {
                             Icon(
                                 imageVector = Icons.Default.StarOutline,
                                 contentDescription = "star icon",
+                                modifier = Modifier.paddingFromBaseline(bottom = 8.dp)
                             )
                             Text(item.stars.toString())
                         }
