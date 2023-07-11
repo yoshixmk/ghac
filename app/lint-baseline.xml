@@ -34,8 +34,8 @@
     </issue>
 
     <issue id="UnusedResources"
-        message="The resource `R.string.result_not_exist_user_` appears to be unused"
-        errorLine1="    &lt;string name=&quot;result_not_exist_user_&quot;>検索結果なし&lt;/string>"
+        message="The resource `R.string.result_not_exist_user` appears to be unused"
+        errorLine1="    &lt;string name=&quot;result_not_exist_user&quot;>検索結果なし&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location file="src/main/res/values/strings.xml" line="8" column="13" />
     </issue>
