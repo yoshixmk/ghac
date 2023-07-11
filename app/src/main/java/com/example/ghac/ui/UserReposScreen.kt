@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -145,7 +144,7 @@ fun UserRepoPagingList(lazyPagingItems: LazyPagingItems<GithubRepo>) {
                             Icon(
                                 imageVector = Icons.Default.StarOutline,
                                 contentDescription = "star icon",
-                                modifier = Modifier.paddingFromBaseline(bottom = 8.dp)
+                                modifier = Modifier.size(22.dp)
                             )
                             Text(item.stars.toString())
                         }
