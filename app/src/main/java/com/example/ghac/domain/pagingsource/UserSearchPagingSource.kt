@@ -3,7 +3,7 @@ package com.example.ghac.domain.pagingsource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.ghac.domain.model.GithubUser
+import com.example.ghac.domain.model.GithubUserItem
 import com.example.ghac.domain.repository.GithubUserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -12,24 +12,24 @@ import javax.inject.Inject
 class UserSearchPagingSource @Inject constructor(
     private val userRepository: GithubUserRepository,
     private val query: String,
-) : PagingSource<Int, GithubUser>() {
+) : PagingSource<Int, GithubUserItem>() {
     companion object {
         const val FIRST_PAGE_INDEX = 1
         const val PAGING_SIZE = 20
     }
 
-    override fun getRefreshKey(state: PagingState<Int, GithubUser>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, GithubUserItem>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): PagingSource.LoadResult<Int, GithubUser> =
+    override suspend fun load(params: LoadParams<Int>): PagingSource.LoadResult<Int, GithubUserItem> =
         withContext(Dispatchers.IO) {
             val position = params.key ?: FIRST_PAGE_INDEX
             return@withContext try {
-                val result = userRepository.getGithubUsersByByKeyword(query, position, PAGING_SIZE)
+                val result = userRepository.getGithubUsersByKeyword(query, position, PAGING_SIZE)
                 LoadResult.Page(
                     data = result,
                     prevKey = null,

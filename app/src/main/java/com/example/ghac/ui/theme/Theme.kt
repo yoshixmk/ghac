@@ -15,10 +15,10 @@ private val DarkColorPalette = darkColorScheme(
 private val LightColorPalette = lightColorScheme(
     primary = Blue500,
     secondary = Purple500,
-    tertiary = Teal200
+    tertiary = Teal200,
 
+    background = White,
     /* Other default colors to override
-    background = Color.White,
     surface = Color.White,
     onPrimary = Color.White,
     onSecondary = Color.Black,

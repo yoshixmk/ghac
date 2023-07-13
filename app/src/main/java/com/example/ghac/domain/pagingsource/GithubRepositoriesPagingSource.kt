@@ -3,35 +3,34 @@ package com.example.ghac.domain.pagingsource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.ghac.domain.model.GithubRepository
-import com.example.ghac.domain.repository.GithubRepositories
-import com.example.ghac.domain.repository.GithubRepositoryRepository
+import com.example.ghac.domain.model.GithubRepo
+import com.example.ghac.domain.repository.GithubRepoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class GithubRepositoriesPagingSource @Inject constructor(
-    private val githubRepositoryRepository: GithubRepositoryRepository,
+    private val githubRepoRepository: GithubRepoRepository,
     private val username: String,
-) : PagingSource<Int, GithubRepository>() {
+) : PagingSource<Int, GithubRepo>() {
     companion object {
         const val FIRST_PAGE_INDEX = 1
         const val PAGING_SIZE = 20
     }
 
-    override fun getRefreshKey(state: PagingState<Int, GithubRepository>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, GithubRepo>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): PagingSource.LoadResult<Int, GithubRepository> =
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GithubRepo> =
         withContext(Dispatchers.IO) {
             val position = params.key ?: FIRST_PAGE_INDEX
             return@withContext try {
-                val result: GithubRepositories =
-                    githubRepositoryRepository.getGithubRepositoriesByUsername(
+                val result =
+                    githubRepoRepository.getGithubRepositoriesByUsername(
                         username = username,
                         page = position,
                         itemsPerPage = PAGING_SIZE
