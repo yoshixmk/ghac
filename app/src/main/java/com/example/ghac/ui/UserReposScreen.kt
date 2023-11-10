@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -86,17 +85,6 @@ fun UserReposScreen(
         Spacer(modifier = Modifier.size(16.dp))
 
         UserRepoPagingList(lazyPagingItems)
-
-        if (viewModel.uiStatePre.value.keyword.isNotEmpty() && lazyPagingItems.itemCount == 0) {
-            Row(
-                modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                Text(stringResource(R.string.result_not_exist_repository))
-            }
-        }
     }
 }
 
@@ -105,6 +93,17 @@ fun UserRepoPagingList(lazyPagingItems: LazyPagingItems<GithubRepo>) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        item {
+            if (lazyPagingItems.itemCount == 0) {
+                Row(
+                    modifier = Modifier.fillParentMaxSize(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(stringResource(R.string.result_not_exist_repository))
+                }
+            }
+        }
         items(
             count = lazyPagingItems.itemCount,
             key = lazyPagingItems.itemKey(),
